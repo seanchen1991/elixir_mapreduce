@@ -5,6 +5,7 @@ defmodule EMR.Mixfile do
     [app: :elixir_mapreduce,
      version: "0.1.0",
      elixir: "~> 1.4",
+     escript: [main_module: EMR],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]

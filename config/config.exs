@@ -3,7 +3,7 @@
 use Mix.Config
 
 config :elixir_mapreduce, 
-  n_file_splits: 50,
+  map_kilobytes: 50,
   n_output_files: 5
 
 # This configuration is loaded before any dependency and is restricted

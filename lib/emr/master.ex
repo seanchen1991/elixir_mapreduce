@@ -1,23 +1,16 @@
 defmodule EMR.Master do
   use Supervisor
 
-  def start_link do 
-    Supervisor.start_link(__MODULE__, :ok)
+  def start_link(input) do
+    map_kilobytes = Application.get_env(:elixir_mapreduce, :map_kilobytes)
+    Supervisor.start_link(__MODULE__, File.stream!(input, [], map_kilobytes * 1000))
   end
 
-  defp split_files do
-    input_file = Path.wildcard(Application.get_env(:elixir_mapreduce, :input_dir))
-    n_file_splits = Application.get_env(:elixir_mapreduce, :n_file_splits)
-
-    file_sizes = input_files
-  end
-
-  def init(:ok) do
-    # Not actually what we want
+  def init(stream) do
     # How to initially monitor one supervisor and then switch to
     # monitoring another one when the first one completes?
     children = [
-      supervisor(EMR.Mapper.Supervisor, EMR.Reducer.Supervisor, [])
+      supervisor(EMR.Mapper.Supervisor, [stream])
     ]
 
     supervise(children, strategy: :one_for_one)
