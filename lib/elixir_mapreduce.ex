@@ -1,18 +1,12 @@
 defmodule EMR do
+  use Application
+
   @moduledoc """
   Documentation for EMR.
   """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> EMR.hello
-      :world
-
-  """
-  def hello do
-    :world
+  
+  def start(_type, _args) do
+    EMR.Master.start_link()
   end
+  
 end

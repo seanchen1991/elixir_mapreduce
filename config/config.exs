@@ -3,7 +3,7 @@
 use Mix.Config
 
 config :elixir_mapreduce, 
-  input_dir: "../test/input",
+  input_dir: "../../test/input",
   output_dir: "../test/output",
   n_file_splits: 50,
   n_output_files: 5
